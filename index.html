@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>다이빙 수요로 보는 해안 관광 계절성</title>
+<style>
+ :root{--bg:#0b1a2b;--card:#12263c;--ink:#e8f0f7;--dim:#8fa8be;--hot:#ff6b5a;--cool:#4aa8d8;--line:#25405c}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+ .wrap{max-width:1040px;margin:0 auto;padding:32px 20px 80px}
+ h1{font-size:28px;line-height:1.35;margin:0 0 8px}
+ .sub{color:var(--dim);margin:0 0 32px}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:0 0 20px}
+ h2{font-size:18px;margin:0 0 4px}
+ .hint{color:var(--dim);font-size:13px;margin:0 0 16px}
+ table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+ th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right}
+ th:first-child,td:first-child{text-align:left}
+ th{color:var(--dim);font-weight:600;font-size:13px}
+ .bar{height:22px;border-radius:4px;display:block}
+ .caveat{color:var(--dim);font-size:13px;border-left:3px solid var(--line);padding-left:12px}
+ .metric{display:flex;gap:28px;flex-wrap:wrap;margin:0 0 8px}
+ .metric div{min-width:120px}
+ .metric b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+ .metric span{color:var(--dim);font-size:13px}
+ footer{color:var(--dim);font-size:13px;margin-top:36px}
+ @media(max-width:640px){.wrap{padding:20px 14px 60px}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <h1>다이빙 수요로 보는 해안 관광 계절성</h1>
+ <p class="sub" id="sub"></p>
+
+ <div class="card">
+  <h2>규모</h2>
+  <p class="hint">한국관광 데이터랩 지역별 관광지 검색순위에서 직접 수집</p>
+  <div class="metric" id="metrics"></div>
+ </div>
+
+ <div class="card">
+  <h2>다이빙 특화지수</h2>
+  <p class="hint">같은 지역·같은 달의 다이빙 검색 점유율 ÷ 일반 관광(자연관광) 검색 점유율.
+   1.0보다 크면 그 달은 일반 관광보다 다이빙 쪽으로 수요가 쏠린다는 뜻입니다.</p>
+  <table><thead><tr>
+   <th>월</th><th>일반관광</th><th>다이빙</th><th>특화지수</th><th></th><th>다이빙 검색량</th>
+  </tr></thead><tbody id="specs"></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2>계절 중심월 — 다이빙은 일반 관광보다 늦다</h2>
+  <p class="hint">검색량으로 가중평균한 '그 해의 중심이 되는 달'. 값이 클수록 시즌이 뒤에 있습니다.</p>
+  <table><thead><tr>
+   <th>연도</th><th>다이빙</th><th>일반관광</th><th>격차</th>
+  </tr></thead><tbody id="centroids"></tbody></table>
+ </div>
+
+ <div class="card">
+  <h2>지역별</h2>
+  <p class="hint" id="regions-note"></p>
+  <table><thead><tr>
+   <th>지역</th><th>다이빙 업체</th><th>다이빙 검색량</th><th>특화 정점</th><th>지수</th>
+  </tr></thead><tbody id="regions"></tbody></table>
+  <p class="hint" id="regions-thin"></p>
+ </div>
+
+ <p class="caveat" id="caveat">※ 수치는 데이터랩 <b>검색량</b>이며 실제 방문량이 아닙니다.
+   검색은 방문 의향의 선행 지표로 읽되, 방문자 수로 환산하지 않습니다.</p>
+ <footer id="footer"></footer>
+</div>
+<script>
+const MONTH = m => Number(m) + "월";
+const pct = v => (v*100).toFixed(2) + "%";
+const num = v => v.toLocaleString("ko-KR");
+
+fetch("data.json").then(r => r.json()).then(d => {
+  const maxIdx = Math.max(...d.specs.map(s => s.index));
+  const peak = d.specs.reduce((a,b) => b.index > a.index ? b : a);
+
+  document.getElementById("sub").textContent =
+    d.meta.period + " · 해안 시군구 " + d.meta.regions + "곳 · 다이빙 업체 " + d.meta.shops + "곳";
+
+  document.getElementById("metrics").innerHTML = [
+    ["수집 데이터", num(d.meta.cells) + "칸"],
+    ["관측 기간", d.meta.years + "개년"],
+    ["다이빙 업체", num(d.meta.shops) + "곳"],
+    ["특화 정점", MONTH(peak.month) + " " + peak.index.toFixed(2)],
+  ].map(([k,v]) => "<div><b>"+v+"</b><span>"+k+"</span></div>").join("");
+
+  document.getElementById("specs").innerHTML = d.specs.map(s => {
+    const w = (s.index / maxIdx * 100).toFixed(1);
+    const color = s.index >= 1 ? "var(--hot)" : "var(--cool)";
+    return "<tr><td>"+MONTH(s.month)+"</td><td>"+pct(s.base_share)+"</td><td>"+pct(s.focus_share)+
+      "</td><td>"+s.index.toFixed(2)+"</td><td style='width:38%'><i class='bar' style='width:"+w+
+      "%;background:"+color+"'></i></td><td>"+num(s.focus_cnt)+"</td></tr>";
+  }).join("");
+
+  document.getElementById("centroids").innerHTML = d.centroids.map(c =>
+    "<tr><td>"+c.year+"</td><td>"+c.dive.toFixed(2)+"</td><td>"+c.base.toFixed(2)+
+    "</td><td>+"+(c.dive-c.base).toFixed(2)+"</td></tr>").join("");
+
+  document.getElementById("regions-note").textContent =
+    "다이빙 검색량이 기간 누적 " + num(d.meta.min_region_searches) +
+    "건 미만인 지역은 표에서 뺐습니다. 기준선이 작은 달에 검색 몇 건만 잡혀도 지수가 부풀기 때문입니다.";
+
+  document.getElementById("regions").innerHTML = d.regions.map(r =>
+    "<tr><td>"+r.name+"</td><td>"+r.shops+"</td><td>"+num(r.total)+"</td><td>"+MONTH(r.peak_month)+
+    "</td><td>"+r.peak_index.toFixed(2)+"</td></tr>").join("");
+
+  const thin = d.meta.excluded_regions || [];
+  document.getElementById("regions-thin").textContent = thin.length
+    ? "표본 부족으로 제외 " + thin.length + "곳 — " +
+      thin.map(r => r.name + "(" + num(r.total) + "건)").join(", ")
+    : "";
+
+  document.getElementById("footer").textContent =
+    "출처 한국관광공사 한국관광 데이터랩 · 생성 " + d.meta.generated;
+});
+</script>
+</body>
+</html>
