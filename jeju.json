@@ -1,0 +1,574 @@
+{
+ "meta": {
+  "generated": "2026-09-23",
+  "period": "2025-09~2026-08",
+  "focus_site": "seogwipo_r500",
+  "sites": [
+   {
+    "id": "seogwipo_r500",
+    "name": "서귀포항 500m",
+    "group": "hub"
+   },
+   {
+    "id": "seogwipo_r1500",
+    "name": "서귀포항 1.5km",
+    "group": "hub"
+   },
+   {
+    "id": "seongsan_r1500",
+    "name": "성산포항",
+    "group": "hub"
+   },
+   {
+    "id": "hallim_r1500",
+    "name": "한림항",
+    "group": "compare"
+   },
+   {
+    "id": "seongsanilchulbong_r1500",
+    "name": "성산일출봉",
+    "group": "hub"
+   },
+   {
+    "id": "jejucity_tapdong_r1500",
+    "name": "제주시 탑동",
+    "group": "compare"
+   }
+  ],
+  "caveat": "※ 1년치(2025-09~2026-08) 월별 일평균을 12개월 평균 = 1.0 으로 지수화했다. 도착당 소비는 카드 매출 ÷ 차량 도착의 대리지표이며 1인당 소비가 아니다."
+ },
+ "monthly": [
+  {
+   "site": "seogwipo_r500",
+   "ym": "202509",
+   "card_idx": 0.993,
+   "car_idx": 0.827
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202510",
+   "card_idx": 1.217,
+   "car_idx": 0.977
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202511",
+   "card_idx": 1.094,
+   "car_idx": 0.831
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202512",
+   "card_idx": 1.002,
+   "car_idx": 0.754
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202601",
+   "card_idx": 1.099,
+   "car_idx": 1.175
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202602",
+   "card_idx": 1.01,
+   "car_idx": 1.135
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202603",
+   "card_idx": 0.953,
+   "car_idx": 0.964
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202604",
+   "card_idx": 0.973,
+   "car_idx": 1.0
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202605",
+   "card_idx": 0.947,
+   "car_idx": 1.152
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202606",
+   "card_idx": 0.856,
+   "car_idx": 0.878
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202607",
+   "card_idx": 0.858,
+   "car_idx": 1.048
+  },
+  {
+   "site": "seogwipo_r500",
+   "ym": "202608",
+   "card_idx": 0.997,
+   "car_idx": 1.259
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202509",
+   "card_idx": 0.994,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202510",
+   "card_idx": 1.141,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202511",
+   "card_idx": 1.012,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202512",
+   "card_idx": 1.005,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202601",
+   "card_idx": 1.039,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202602",
+   "card_idx": 1.068,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202603",
+   "card_idx": 0.918,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202604",
+   "card_idx": 0.987,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202605",
+   "card_idx": 0.994,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202606",
+   "card_idx": 0.902,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202607",
+   "card_idx": 0.908,
+   "car_idx": null
+  },
+  {
+   "site": "seogwipo_r1500",
+   "ym": "202608",
+   "card_idx": 1.033,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202509",
+   "card_idx": 1.056,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202510",
+   "card_idx": 1.255,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202511",
+   "card_idx": 1.001,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202512",
+   "card_idx": 0.868,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202601",
+   "card_idx": 0.868,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202602",
+   "card_idx": 0.869,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202603",
+   "card_idx": 0.905,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202604",
+   "card_idx": 1.025,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202605",
+   "card_idx": 1.072,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202606",
+   "card_idx": 0.956,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202607",
+   "card_idx": 0.951,
+   "car_idx": null
+  },
+  {
+   "site": "seongsan_r1500",
+   "ym": "202608",
+   "card_idx": 1.173,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202509",
+   "card_idx": 1.035,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202510",
+   "card_idx": 1.067,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202511",
+   "card_idx": 1.017,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202512",
+   "card_idx": 1.002,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202601",
+   "card_idx": 0.945,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202602",
+   "card_idx": 0.987,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202603",
+   "card_idx": 1.005,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202604",
+   "card_idx": 0.964,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202605",
+   "card_idx": 0.983,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202606",
+   "card_idx": 0.954,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202607",
+   "card_idx": 0.999,
+   "car_idx": null
+  },
+  {
+   "site": "hallim_r1500",
+   "ym": "202608",
+   "card_idx": 1.041,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202509",
+   "card_idx": 0.995,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202510",
+   "card_idx": 1.225,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202511",
+   "card_idx": 0.971,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202512",
+   "card_idx": 0.847,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202601",
+   "card_idx": 0.855,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202602",
+   "card_idx": 0.876,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202603",
+   "card_idx": 0.914,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202604",
+   "card_idx": 1.069,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202605",
+   "card_idx": 1.091,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202606",
+   "card_idx": 0.99,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202607",
+   "card_idx": 0.955,
+   "car_idx": null
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "ym": "202608",
+   "card_idx": 1.212,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202509",
+   "card_idx": 0.985,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202510",
+   "card_idx": 1.026,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202511",
+   "card_idx": 1.014,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202512",
+   "card_idx": 0.978,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202601",
+   "card_idx": 0.995,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202602",
+   "card_idx": 1.034,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202603",
+   "card_idx": 0.931,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202604",
+   "card_idx": 0.991,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202605",
+   "card_idx": 1.011,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202606",
+   "card_idx": 0.968,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202607",
+   "card_idx": 0.992,
+   "car_idx": null
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "ym": "202608",
+   "card_idx": 1.074,
+   "car_idx": null
+  }
+ ],
+ "per_arrival": [
+  {
+   "ym": "202509",
+   "won": 252225,
+   "idx": 1.174
+  },
+  {
+   "ym": "202510",
+   "won": 261413,
+   "idx": 1.216
+  },
+  {
+   "ym": "202511",
+   "won": 276280,
+   "idx": 1.285
+  },
+  {
+   "ym": "202512",
+   "won": 279026,
+   "idx": 1.298
+  },
+  {
+   "ym": "202601",
+   "won": 196245,
+   "idx": 0.913
+  },
+  {
+   "ym": "202602",
+   "won": 186813,
+   "idx": 0.869
+  },
+  {
+   "ym": "202603",
+   "won": 207516,
+   "idx": 0.966
+  },
+  {
+   "ym": "202604",
+   "won": 204370,
+   "idx": 0.951
+  },
+  {
+   "ym": "202605",
+   "won": 172542,
+   "idx": 0.803
+  },
+  {
+   "ym": "202606",
+   "won": 204572,
+   "idx": 0.952
+  },
+  {
+   "ym": "202607",
+   "won": 171909,
+   "idx": 0.8
+  },
+  {
+   "ym": "202608",
+   "won": 166220,
+   "idx": 0.773
+  }
+ ],
+ "amplitude": [
+  {
+   "site": "seongsan_r1500",
+   "name": "성산포항",
+   "group": "hub",
+   "card_amp": 1.45
+  },
+  {
+   "site": "seongsanilchulbong_r1500",
+   "name": "성산일출봉",
+   "group": "hub",
+   "card_amp": 1.44
+  },
+  {
+   "site": "seogwipo_r500",
+   "name": "서귀포항 500m",
+   "group": "hub",
+   "card_amp": 1.42
+  },
+  {
+   "site": "seogwipo_r1500",
+   "name": "서귀포항 1.5km",
+   "group": "hub",
+   "card_amp": 1.26
+  },
+  {
+   "site": "jejucity_tapdong_r1500",
+   "name": "제주시 탑동",
+   "group": "compare",
+   "card_amp": 1.15
+  },
+  {
+   "site": "hallim_r1500",
+   "name": "한림항",
+   "group": "compare",
+   "card_amp": 1.13
+  }
+ ]
+}

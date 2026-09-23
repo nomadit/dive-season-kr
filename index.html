@@ -25,6 +25,13 @@
  .metric b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
  .metric span{color:var(--dim);font-size:13px}
  footer{color:var(--dim);font-size:13px;margin-top:36px}
+ .tabs{display:flex;gap:8px;margin:0 0 20px;border-bottom:1px solid var(--line)}
+ .tabs a{color:var(--dim);text-decoration:none;padding:8px 4px;border-bottom:2px solid transparent;font-weight:600}
+ .tabs a[aria-selected=true]{color:var(--ink);border-bottom-color:var(--hot)}
+ .scroll{overflow-x:auto}
+ .scroll td{white-space:nowrap}
+ .scroll td:first-child{white-space:normal}
+ .grp{color:var(--dim);font-size:12px}
  @media(max-width:640px){.wrap{padding:20px 14px 60px}h1{font-size:22px}}
 </style>
 </head>
@@ -33,6 +40,12 @@
  <h1>다이빙 수요로 보는 해안 관광 계절성</h1>
  <p class="sub" id="sub"></p>
 
+ <nav class="tabs" role="tablist">
+  <a href="#kr" id="t-kr" role="tab" aria-selected="true">전국 계절성</a>
+  <a href="#jeju" id="t-jeju" role="tab" aria-selected="false">제주 바다</a>
+ </nav>
+
+ <section id="kr">
  <div class="card">
   <h2>규모</h2>
   <p class="hint">한국관광 데이터랩 지역별 관광지 검색순위에서 직접 수집</p>
@@ -68,6 +81,35 @@
  <p class="caveat" id="caveat">※ 수치는 데이터랩 <b>검색량</b>이며 실제 방문량이 아닙니다.
    검색은 방문 의향의 선행 지표로 읽되, 방문자 수로 환산하지 않습니다.</p>
  <footer id="footer"></footer>
+ </section>
+
+ <section id="jeju" hidden>
+ <div class="card">
+  <h2>제주 바다는 가을에 돈을 쓴다</h2>
+  <p class="hint">서귀포항 반경 500m. 차량 도착(내비게이션)과 카드 소비(신용카드)를 각각 12개월 평균 = 1.0 으로 맞춰 겹쳐 봤습니다.</p>
+  <div class="metric" id="j-metrics"></div>
+ </div>
+
+ <div class="card">
+  <h2>서귀포항 — 방문과 지출의 월별 흐름</h2>
+  <p class="hint">도착당 소비 = 그 달 카드 매출 ÷ 차량 도착. 한 번 온 방문이 돈을 얼마나 남기는지 보는 대리지표입니다.</p>
+  <div class="scroll"><table><thead><tr>
+   <th>월</th><th>차량 도착</th><th>카드 소비</th><th>도착당 소비</th><th></th>
+  </tr></thead><tbody id="j-hub"></tbody></table></div>
+ </div>
+
+ <div class="card">
+  <h2>지점별 계절 진폭</h2>
+  <p class="hint">카드 소비 지수의 연중 최대 ÷ 최소. 클수록 성수기와 비수기 차이가 큽니다.</p>
+  <div class="scroll"><table><thead><tr>
+   <th>지점</th><th>카드 정점</th><th>진폭</th><th></th>
+  </tr></thead><tbody id="j-amp"></tbody></table></div>
+  <p class="hint" id="j-amp-note"></p>
+ </div>
+
+ <p class="caveat" id="j-caveat">※ 1년치 자료입니다. 도착당 소비는 카드 매출 ÷ 차량 도착의 <b>대리지표</b>이며 1인당 소비가 아닙니다.</p>
+ <footer id="j-footer"></footer>
+ </section>
 </div>
 <script>
 const MONTH = m => Number(m) + "월";
@@ -117,6 +159,64 @@ fetch("data.json").then(r => r.json()).then(d => {
   document.getElementById("footer").textContent =
     "출처 한국관광공사 한국관광 데이터랩 · 생성 " + d.meta.generated;
 });
+
+let jejuLoaded = false;
+function renderJeju(j) {
+  const f = j.meta.focus_site;
+  const name = Object.fromEntries(j.meta.sites.map(s => [s.id, s.name]));
+  const hub = j.monthly.filter(r => r.site === f);
+  const per = Object.fromEntries(j.per_arrival.map(r => [r.ym, r]));
+  const top = key => hub.reduce((a,b) => b[key] > a[key] ? b : a);
+  const pHi = j.per_arrival.reduce((a,b) => b.won > a.won ? b : a);
+  const pLo = j.per_arrival.reduce((a,b) => b.won < a.won ? b : a);
+  const man = w => (w/1e4).toFixed(1) + "만원";
+  const M = ym => MONTH(ym.slice(4));
+
+  document.getElementById("j-metrics").innerHTML = [
+    ["방문 정점 (차량)", M(top("car_idx").ym)],
+    ["지출 정점 (카드)", M(top("card_idx").ym)],
+    ["도착당 소비 최고 ÷ 최저", (pHi.won/pLo.won).toFixed(2) + "배"],
+  ].map(([k,v]) => "<div><b>"+v+"</b><span>"+k+"</span></div>").join("");
+
+  const maxP = Math.max(...j.per_arrival.map(r => r.idx));
+  document.getElementById("j-hub").innerHTML = hub.map(r => {
+    const p = per[r.ym], w = (p.idx / maxP * 100).toFixed(1);
+    const color = p.idx >= 1 ? "var(--hot)" : "var(--cool)";
+    return "<tr><td>"+M(r.ym)+"</td><td>"+r.car_idx.toFixed(2)+"</td><td>"+r.card_idx.toFixed(2)+
+      "</td><td>"+man(p.won)+"</td><td style='width:30%'><i class='bar' style='width:"+w+"%;background:"+color+"'></i></td></tr>";
+  }).join("");
+
+  const maxA = Math.max(...j.amplitude.map(a => a.card_amp));
+  const peakOf = id => j.monthly.filter(r => r.site === id).reduce((a,b) => b.card_idx > a.card_idx ? b : a);
+  const label = {hub: "관광 거점", compare: "비교 지점"};
+  document.getElementById("j-amp").innerHTML = j.amplitude.map(a => {
+    const w = (a.card_amp / maxA * 100).toFixed(1);
+    const color = a.group === "hub" ? "var(--hot)" : "var(--cool)";
+    return "<tr><td>"+a.name+" <span class='grp'>"+label[a.group]+"</span></td><td>"+M(peakOf(a.site).ym)+
+      "</td><td>"+a.card_amp.toFixed(2)+"</td><td style='width:30%'><i class='bar' style='width:"+w+"%;background:"+color+"'></i></td></tr>";
+  }).join("");
+  const avg = g => { const v = j.amplitude.filter(a => a.group === g).map(a => a.card_amp); return (v.reduce((x,y) => x+y, 0)/v.length).toFixed(2); };
+  document.getElementById("j-amp-note").textContent =
+    "관광 거점 평균 " + avg("hub") + " · 비교 지점 평균 " + avg("compare");
+  document.getElementById("j-caveat").textContent = j.meta.caveat;
+  document.getElementById("j-footer").textContent =
+    "출처 제주관광빅데이터플랫폼 데이터맵(지점 반경 조회) · 기간 " + j.meta.period + " · 생성 " + j.meta.generated;
+}
+
+function show(tab) {
+  for (const t of ["kr", "jeju"]) {
+    document.getElementById(t).hidden = t !== tab;
+    document.getElementById("sub").hidden = tab !== "kr";
+    document.getElementById("t-" + t).setAttribute("aria-selected", String(t === tab));
+  }
+  if (tab === "jeju" && !jejuLoaded) {
+    jejuLoaded = true;
+    fetch("jeju.json").then(r => r.json()).then(renderJeju);
+  }
+}
+const route = () => show(location.hash === "#jeju" ? "jeju" : "kr");
+window.addEventListener("hashchange", route);
+route();
 </script>
 </body>
 </html>
